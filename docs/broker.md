@@ -22,10 +22,10 @@ will forget about its existence. Brokers are known from routers, like routers ar
 known from gateways. 
 
 On the other hand, brokers communicate with a bunch of handlers that have registered themselves
-beforehand. This way, when a end-device joins the network every broker has to communicate with its
-own handlers list to determine whether or not it has to handle packets incoming from that
+beforehand. This way, when a end-device joins the network every broker has to communicate with
+its own handlers list to determine whether or not it has to handle packets incoming from that
 device. The previous assertion assumes that a given handler isn't registered to several
- brokers. 
+brokers. 
 
 Relations are schematically represented in the next diagram. 
 
@@ -166,10 +166,10 @@ handleUplink :: Broker, Packet -> Unit
 handleData :: Broker, DevAddr, Data -> Unit
 
 -- Handle an incoming command from the Network Server
-HandleCommand :: Broker, DevAddr, Command -> Unit
+handleCommand :: Broker, DevAddr, Command -> Unit
 
 -- Receive and store a network session key associated to a device
-HandleNwkSKey :: Broker, DevAdrr, NwkSKey -> Unit
+handleNwkSKey :: Broker, DevAdrr, NwkSKey -> Unit
 
 ```
 

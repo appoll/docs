@@ -130,7 +130,7 @@ corresponding Handler without having any information about either the recipient 
 meaningless id) or the content. 
 
 Because a given Handler is able to decrypt the data payload of a given packet, it could
-also implement mechanisms such as Geolocation and send to the corresponding application some
+also implement mechanisms such as geolocation and send to the corresponding application some
 interesting meta-data.
 
 A Handler could be either part of an application or a standalone trusty server on which
