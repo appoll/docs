@@ -56,12 +56,12 @@ A given gateway will be connected to a router of its choice, meaning that the ga
 configured to interact with that precise router (a gateway could be configured for several
 routers, but the idea is the same; they are not allowed dynamically and won't change as long as
 the configuration remains the same). Obviously, a router might received communications from
-several gateways as well. Thus, gateways are completely unknown from a router - and would
-remain unknown during the router lifecycle.
-
-A router is thereby a machine on which gateway will attempt to connect. This assumes that the
-router is accessible via a static IP address or solvable through a DNS service. The whole
-protocol used by gateways can be found [here][gateway_protocol] and could be sum up as follow:
+several gateways as well. Thus, routers do not have upfront knowledge of gateways. A router
+only receives incoming connections from gateways, and once these are closed, it keeps no trace
+of the gateway. A router is thereby a machine on which gateway will attempt to connect. This
+assumes that the router is accessible via a static IP address or solvable through a DNS
+service. The whole protocol used by gateways can be found [here][gateway_protocol] and could be
+sum up as follow:
 
 - Gateways initiate communication with a router
 - Gateways send data using a json structure and containing one or several packets
