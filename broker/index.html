@@ -162,6 +162,10 @@ beforehand. This way, when a end-device joins the network every broker has to co
 its own handlers list to determine whether or not it has to handle packets incoming from that
 device. The previous assertion assumes that a given handler isn't registered to several
 brokers. </p>
+<p><span class="label label-info">Discussion</span>   </p>
+<blockquote>
+<p>What if a broker goes down? How can we ensure the reliability of the network?</p>
+</blockquote>
 <p>Relations are schematically represented in the next diagram. </p>
 <hr />
 <p><img alt="Broker's relations" src="../img/broker_relations.svg" />
