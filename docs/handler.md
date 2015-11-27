@@ -63,6 +63,11 @@ the handler will still reply with a positive response to the willing application
 
 ### Uplink communication
 
+We'll call uplink communication any communication coming from brokers. Uplink communications
+could be either data coming from a node or a join request.  
 
-
-
+Because of the network architecture, several duplicates of the same messages could arrive to
+the handler. We assume that all of those messages are arriving all in the same time. The
+handler will then have to deduplicate all messages if necessary and proceed to a geolocation
+based on the information provided by the gateways. The handler also has an access to the
+application secret key, Thus, it could decrypt the data and forward them to the application. 
