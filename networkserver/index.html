@@ -127,11 +127,144 @@
 
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#network-server">Network Server</a></li>
+        
+            <li><a href="#role">Role</a></li>
+        
+    
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-</div>
+<h1 id="network-server">Network Server</h1>
+<h2 id="role">Role</h2>
+<p>A network server is a component dedicated to the network management. It handle the required
+logic to handle and to emit MAC commands (more precisions about MAC commands are given below).
+Basically, a network server is composed of two parts:</p>
+<ul>
+<li>a core logic</li>
+<li>a data storage</li>
+</ul>
+<p>The former interprets commands sent by nodes, forwarded by routers and brokers, combine them
+with data stored in the latter in order to give an appropriate answer. The main usecase of the
+network server will concern the adaptive data rate (<em>ADR</em>) control detailed in the <a href="https://www.lora-alliance.org/portals/0/specs/LoRaWAN%20Specification%201R0.pdf">LoRaWAN
+specifications 1.0</a> - section 4.3.1.1 Adaptive data rate control in frame header. </p>
+<p>In order to keep the network highly reactive, we'll adopt an in-memory storage. The network
+server will make sure data are persisted regularly in order to both prevent from small
+disruptions and recover from an existing state after an update or a maintainance activity.</p>
+<p>A network server is associated to a broker. The broker is forwarding, queuing and dispatching
+packets whereas the network server interprets them when necessary. Because a network server is
+only having interactions with a dedicated broker, the set broker + network server could be
+seen as one unique component with a bigger but well-defined set of responsibilities. This
+also implies that a given network server only has one and only one correspondent. There is no
+transversal communication between network servers. The storage isn't distributed over the
+network but rather fragmented over it. </p>
+<p><span class="label label-info">discussion</span>   </p>
+<blockquote>
+<p>In future versions, it could be nice for reliability to make data of network servers
+accessible from anywhere in the network. This nevertheless raises an issue about
+confidentiality and confidence over all network constituents. </p>
+</blockquote>
+<p>Besides, the network server has also an active role during an over-the-air activation (join
+request) from a node: it allocates a new randomly generated device address. Because node
+addresses within the network are 24 bits length, there is 100% chances to allocate the same
+address to two differents nodes after more or less 5500 allocations. However, all packets also
+carry a MIC number, and thus there is still a way for the network to clearly identify a node
+without any risk of collision. </p>
+<h3 id="mac-commands">MAC Commands</h3>
+<p>There is a set of fourteen (in fact, 7 commands and 7 acknowledgements) MAC commands that will
+transit over the network and with which it should be compliant. A MAC command materialize an
+exchange between the network (via the network server) and the MAC layer of an env-device. This
+means that those commands are invisible for the application server registered to a handler, but
+also for the one embedded on the device.
+These commands serves the network internal management: </p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Transmitted by</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LinkCheckReq</td>
+<td>End-device</td>
+<td>Used by an end-device to validate its connectivity to a network</td>
+</tr>
+<tr>
+<td>LinkCheckAns</td>
+<td>Network Server</td>
+<td>Answer to LinkCheckReq command. Contains the received signal power estimation indicating to the end-device the quality of reception (link margin).</td>
+</tr>
+<tr>
+<td>LinkADRReq</td>
+<td>Network Server</td>
+<td>Requests the end-device to change data rate, transmit power, repetition rate or channel.</td>
+</tr>
+<tr>
+<td>LinkADRAns</td>
+<td>End-device</td>
+<td>Acknowledges the LinkADRReq</td>
+</tr>
+<tr>
+<td>DutyCycleReq</td>
+<td>Network Server</td>
+<td>Sets the maximum aggregated transmit duty-cycle of a device</td>
+</tr>
+<tr>
+<td>DutyCycleAns</td>
+<td>End-device</td>
+<td>Acknowledges a DutyCycleReq command</td>
+</tr>
+<tr>
+<td>RXParamSetupReq</td>
+<td>Network Server</td>
+<td>Sets the reception slots parameters</td>
+</tr>
+<tr>
+<td>RXParamSetupAns</td>
+<td>End-device</td>
+<td>Acknowledges a RXParamSetupReq command</td>
+</tr>
+<tr>
+<td>DevStatusReq</td>
+<td>Network Server</td>
+<td>Request the status of the end-device</td>
+</tr>
+<tr>
+<td>DevStatusAns</td>
+<td>End-device</td>
+<td>Returns the status of the end-device, namely its battery level and its demodulation margin</td>
+</tr>
+<tr>
+<td>NewChannelReq</td>
+<td>Network Server</td>
+<td>Creates or modifies the definition of a radio channel</td>
+</tr>
+<tr>
+<td>NewChannelAns</td>
+<td>End-device</td>
+<td>Acknowledges a NewChannelReq command</td>
+</tr>
+<tr>
+<td>RXTimingSetupReq</td>
+<td>Network Server</td>
+<td>Sets the timing of the reception slots</td>
+</tr>
+<tr>
+<td>RXTimingSetupAns</td>
+<td>End-device</td>
+<td>Acknowledges a RXTimingSetupReq command</td>
+</tr>
+</tbody>
+</table>
+<p><em>The above table is extracted from the <a href="https://www.lora-alliance.org/portals/0/specs/LoRaWAN%20Specification%201R0.pdf">LoRaWAN specifications</a> - Section 5 MAC Commands.</em></p>
+<p>Technically, only one "real" command is emitted by the node, the rest is only acknowledgement
+and data transmission. Commands are mainly initiated by the network server and all of them are
+detailed in the LoRaWan Specifications.</p>
+<h3 id="communication-with-the-broker">Communication with the broker</h3>
+<p>// TODO</p></div>
         </div>
 
         
