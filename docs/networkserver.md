@@ -1,6 +1,22 @@
 Network Server
 ==============
 
+
+NS          | Description
+------------|------------
+NS-1        | Handle commands from a broker
+NS-2        | Monitor the network
+NS-3        | Emit commands to a broker
+NS-4        | Handle OTAA & new node
+            |
+NS-1.1      | Listen and receive incoming command messages
+NS-1.2      | Identify related command
+NS-1.3      | Execute command
+NS-1.4      | Reply if necessary with another command
+            | 
+//TODO
+
+
 ## Role
 
 A network server is a component dedicated to the network management. It handle the required
@@ -74,6 +90,27 @@ detailed in the LoRaWan Specifications.
 
 ### Communication with the broker
 
+In practice, the network server and the broker are likely to be localised on the same physical
+entity. However, in order to be able to scale easily in the future and to decouple those
+components if needed, they will talk to each other through well defined interfaces. In the same
+pattern we are using for any component, the network server will be divided in three
+sub-components:
+
+- The storage, that provides an interface to the core logic to store and retrieve stored data.
+- The core logic, which manages commands and trigger actions on the other sub components.
+- The broker adapter, which communicates with the broker and trigger action on the core logic
+  when commands are forwarded by the broker.
+
+## Interfaces
+
+### Storage
 // TODO
+
+### Core
+// TODO
+
+### Broker adapter
+// TODO
+
 
 [lorawan]: https://www.lora-alliance.org/portals/0/specs/LoRaWAN%20Specification%201R0.pdf
