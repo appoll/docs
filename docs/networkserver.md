@@ -20,11 +20,11 @@ server will make sure data are persisted regularly in order to both prevent from
 disruptions and recover from an existing state after an update or a maintainance activity.
 
 A network server is associated to a broker. The broker is forwarding, queuing and dispatching
-packets whereas the network server interpret them when necessary. Because a network server is
+packets whereas the network server interprets them when necessary. Because a network server is
 only having interactions with a dedicated broker, the set broker + network server could be
 seen as one unique component with a bigger but well-defined set of responsibilities. This
-also implies that a given network server only have one and only one correspondent. There is no
-transversal communication between network server. The storage isn't distributed over the
+also implies that a given network server only has one and only one correspondent. There is no
+transversal communication between network servers. The storage isn't distributed over the
 network but rather fragmented over it. 
 
 <span class="label label-info">discussion</span>   
@@ -32,7 +32,48 @@ network but rather fragmented over it.
 > accessible from anywhere in the network. This nevertheless raises an issue about
 > confidentiality and confidence over all network constituents. 
 
+Besides, the network server has also an active role during an over-the-air activation (join
+request) from a node: it allocates a new randomly generated device address. Because node
+addresses within the network are 24 bits length, there is 100% chances to allocate the same
+address to two differents nodes after more or less 5500 allocations. However, all packets also
+carry a MIC number, and thus there is still a way for the network to clearly identify a node
+without any risk of collision. 
 
 
+### MAC Commands
+
+There is a set of fourteen (in fact, 7 commands and 7 acknowledgements) MAC commands that will
+transit over the network and with which it should be compliant. A MAC command materialize an
+exchange between the network (via the network server) and the MAC layer of an env-device. This
+means that those commands are invisible for the application server registered to a handler, but
+also for the one embedded on the device.
+These commands serves the network internal management: 
+
+Command         | Transmitted by        | Description 
+----------------|-----------------------|------------
+LinkCheckReq    | End-device            | Used by an end-device to validate its connectivity to a network
+LinkCheckAns    | Network Server        | Answer to LinkCheckReq command. Contains the received signal power estimation indicating to the end-device the quality of reception (link margin).
+LinkADRReq      | Network Server        | Requests the end-device to change data rate, transmit power, repetition rate or channel.
+LinkADRAns      | End-device            | Acknowledges the LinkADRReq
+DutyCycleReq    | Network Server        | Sets the maximum aggregated transmit duty-cycle of a device
+DutyCycleAns    | End-device            | Acknowledges a DutyCycleReq command
+RXParamSetupReq | Network Server        | Sets the reception slots parameters
+RXParamSetupAns | End-device            | Acknowledges a RXParamSetupReq command
+DevStatusReq    | Network Server        | Request the status of the end-device
+DevStatusAns    | End-device            | Returns the status of the end-device, namely its battery level and its demodulation margin
+NewChannelReq   | Network Server        | Creates or modifies the definition of a radio channel
+NewChannelAns   | End-device            | Acknowledges a NewChannelReq command
+RXTimingSetupReq| Network Server        | Sets the timing of the reception slots
+RXTimingSetupAns| End-device            | Acknowledges a RXTimingSetupReq command
+
+*The above table is extracted from the [LoRaWAN specifications][lorawan] - Section 5 MAC Commands.*
+
+Technically, only one "real" command is emitted by the node, the rest is only acknowledgement
+and data transmission. Commands are mainly initiated by the network server and all of them are
+detailed in the LoRaWan Specifications.
+
+### Communication with the broker
+
+// TODO
 
 [lorawan]: https://www.lora-alliance.org/portals/0/specs/LoRaWAN%20Specification%201R0.pdf
