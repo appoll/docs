@@ -131,12 +131,68 @@
         
             <li><a href="#role">Role</a></li>
         
+            <li><a href="#interfaces">Interfaces</a></li>
+        
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
 <h1 id="network-server">Network Server</h1>
+<table>
+<thead>
+<tr>
+<th>NS</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NS-1</td>
+<td>Handle commands from a broker</td>
+</tr>
+<tr>
+<td>NS-2</td>
+<td>Monitor the network</td>
+</tr>
+<tr>
+<td>NS-3</td>
+<td>Emit commands to a broker</td>
+</tr>
+<tr>
+<td>NS-4</td>
+<td>Handle OTAA &amp; new node</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>NS-1.1</td>
+<td>Listen and receive incoming command messages</td>
+</tr>
+<tr>
+<td>NS-1.2</td>
+<td>Identify related command</td>
+</tr>
+<tr>
+<td>NS-1.3</td>
+<td>Execute command</td>
+</tr>
+<tr>
+<td>NS-1.4</td>
+<td>Reply if necessary with another command</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>//TODO</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="role">Role</h2>
 <p>A network server is a component dedicated to the network management. It handle the required
 logic to handle and to emit MAC commands (more precisions about MAC commands are given below).
@@ -264,6 +320,23 @@ These commands serves the network internal management: </p>
 and data transmission. Commands are mainly initiated by the network server and all of them are
 detailed in the LoRaWan Specifications.</p>
 <h3 id="communication-with-the-broker">Communication with the broker</h3>
+<p>In practice, the network server and the broker are likely to be localised on the same physical
+entity. However, in order to be able to scale easily in the future and to decouple those
+components if needed, they will talk to each other through well defined interfaces. In the same
+pattern we are using for any component, the network server will be divided in three
+sub-components:</p>
+<ul>
+<li>The storage, that provides an interface to the core logic to store and retrieve stored data.</li>
+<li>The core logic, which manages commands and trigger actions on the other sub components.</li>
+<li>The broker adapter, which communicates with the broker and trigger action on the core logic
+  when commands are forwarded by the broker.</li>
+</ul>
+<h2 id="interfaces">Interfaces</h2>
+<h3 id="storage">Storage</h3>
+<p>// TODO</p>
+<h3 id="core">Core</h3>
+<p>// TODO</p>
+<h3 id="broker-adapter">Broker adapter</h3>
 <p>// TODO</p></div>
         </div>
 
