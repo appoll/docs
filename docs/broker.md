@@ -13,18 +13,17 @@ refer at any time.
 Therefore, a broker is in charge of a set of nodes. This is a 1-to-1 relation meaning that a
 node is controlled by a unique broker. There is for the moment no duplication or sharing
 possible. A broker does not have access to network servers different from the one it has been
-assigned. A node isn't shared and all packets coming from a given node end to the same
-given broker.
+assigned. A node isn't shared and all packets coming from a given node end up in the same broker.
 
-Besides, a broker does not know any router by advance. The process is seemingly similar to the way
-gateways and routers are getting to know each others. A router will initiate a communication
-toward a broker. After dealing with the communication, the broker may reply to the router and
+Besides, a broker does not know any router in advance. The process is basically similar to the way
+gateways and routers discover each other. A router will initiate a communication
+with a broker. After dealing with the communication, the broker may reply to the router and
 will forget about its existence. Brokers are known from routers, like routers are
 known from gateways. 
 
 On the other hand, brokers communicate with a bunch of handlers that have registered themselves
-beforehand. This way, when a device joins the network every broker has to communicate with its
-own handlers list to determine wether or not it has to handle packets incoming from that
+beforehand. This way, when a end-device joins the network every broker has to communicate with its
+own handlers list to determine whether or not it has to handle packets incoming from that
 device. The previous assertion assumes that a given handler isn't registered to several
  brokers. 
 
@@ -50,15 +49,15 @@ handler.
 
 
 The broker is waiting for router to forward packets coming from nodes. When receiving a packet,
-the broker should firstly check wether or not it should take care of the packet. This is done
+the broker should firstly check whether or not it should take care of the packet. This is done
 by looking into a local storage of node addresses. This is list of addresses is created
 dynamically during the broker's lifecycle as long as handlers register to the broker. 
 Then, because collisions may happen between node adresses, the broker also has to perform a
-`MIC check` to ensure both the validity and its responsability for the given packet. 
+`MIC check` to ensure both the validity and its responsibility for the given packet. 
 
 An unknown address or a invalid `MIC check` should lead to an error transmitted to the router
 emitter. Errors are detailed in a next section. If everything went well, the broker has to
-decode the packet `MAC header - MHDR` and determine wether the packet carry a command or data.
+decode the packet `MAC header - MHDR` and determine whether the packet carry a command or data.
 The broker's behavior is thereby slightly different regarding to the packet's content. By the
 by, a packet may contain both a command and data, in such a case, it will be processed for both
 content. 
