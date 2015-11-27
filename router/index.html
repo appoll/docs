@@ -271,11 +271,12 @@ separately. </p>
 configured to interact with that precise router (a gateway could be configured for several
 routers, but the idea is the same; they are not allowed dynamically and won't change as long as
 the configuration remains the same). Obviously, a router might received communications from
-several gateways as well. Thus, gateways are completely unknown from a router - and would
-remain unknown during the router lifecycle.</p>
-<p>A router is thereby a machine on which gateway will attempt to connect. This assumes that the
-router is accessible via a static IP address or solvable through a DNS service. The whole
-protocol used by gateways can be found <a href="https://github.com/TheThingsNetwork/packet_forwarder/blob/master/PROTOCOL.TXT">here</a> and could be sum up as follow:</p>
+several gateways as well. Thus, routers do not have upfront knowledge of gateways. A router
+only receives incoming connections from gateways, and once these are closed, it keeps no trace
+of the gateway. A router is thereby a machine on which gateway will attempt to connect. This
+assumes that the router is accessible via a static IP address or solvable through a DNS
+service. The whole protocol used by gateways can be found <a href="https://github.com/TheThingsNetwork/packet_forwarder/blob/master/PROTOCOL.TXT">here</a> and could be
+sum up as follow:</p>
 <ul>
 <li>Gateways initiate communication with a router</li>
 <li>Gateways send data using a json structure and containing one or several packets</li>
