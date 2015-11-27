@@ -281,7 +281,7 @@ protocol used by gateways can be found <a href="https://github.com/TheThingsNetw
 <li>Gateways send data using a json structure and containing one or several packets</li>
 <li>The router acknowledge reception of data</li>
 <li>Gateways could be protected by a firewall or could use a NAT, routers cannot initiate communications</li>
-<li>Gateways might trigger and pull the router periodically to keep a connexion open (this is
+<li>Gateways might trigger and pull the router periodically to keep a connection open (this is
   fairly an implementation detail, but the gateway protocol we are refering to is describing an
   implementation. We'll see how we handle this in the next section)</li>
 <li>The communication is closed after a delay (after the second receive window, cf. downlink
@@ -296,7 +296,7 @@ determine to which broker should the packet be forwarded. Two options exist:</p>
 <p>The former option will lead to a direct forwarding whereas the latter will require a network
 discovering / broadcasting (see the section <em>Address resolution and caching</em>).</p>
 <h3 id="downlink-communication">Downlink communication</h3>
-<p>Because of the first version, the network will only supports devices of class A, the connexion
+<p>Because of the first version, the network will only supports devices of class A, the connection
 between a gateway and a router would stay opened for a maximum of 2 seconds. The whole process
 is detailed in the <a href="https://www.lora-alliance.org/portals/0/specs/LoRaWAN%20Specification%201R0.pdf">LoRaWAN specifications 1.0</a> - section 3.3 Receive Windows. In few
 words though, after having emitted messages, a class A node will open two short receive windows
