@@ -27,6 +27,9 @@ its own handlers list to determine whether or not it has to handle packets incom
 device. The previous assertion assumes that a given handler isn't registered to several
 brokers. 
 
+<span class="label label-info">Discussion</span>   
+> What if a broker goes down? How can we ensure the reliability of the network?
+
 Relations are schematically represented in the next diagram. 
 
 --------------------- 

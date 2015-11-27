@@ -47,7 +47,7 @@ Additionally, these components interact with external entities over which we hav
 <p align="center">*Network components*</p>
 -------------------
 
-## Node
+### Node
 Nodes or end-devices refer to one end of the chain. End-devices emit signals using
 [*LoRa*][lora_technology] modulation and frequency range towards Gateways. They are split into
 3 classes: 
@@ -63,7 +63,7 @@ also has a specific secret application session key and a network session key
 These specifications primarly focus on the class A. Future network versions will implement
 mechanisms to handle class B and class C but they are irrevelant with the current document.
 
-## Gateway
+### Gateway
 Gateways might be seen as a way to transform multiple messages emitters into one much more
 demanding emitter. Therefore, a Gateway gathers [*LoRa*][lora_technology] signals coming from a
 bunch of near end-devices. A given end-device does not need to know the nearest gateways, nor it
@@ -81,9 +81,7 @@ scheduled time defined by the network meaning that the network is able to send p
 Gateways at any moment, regardless of their emission time (see more about the two-windows
 response mechanism //TODO add a link). 
 
-## Application
-
-## Router
+### Router
 
 Routers are entry points of the network from Nodes perspective. Packets transmitted by Nodes are forwarded to a specific Router from one or several Gateways. The Router then forwards those packets
 to one or several Brokers. The communication is bi-directional: Routers may also
@@ -94,7 +92,7 @@ transfer packets from Broker to Gateways.
 <p align="center">*Uplink forwarding*</p>
 -------------------
 
-## Broker
+### Broker
 
 Brokers have a global vision of a network's part. They are in charge of several nodes, meaning
 that they will handle packets coming from those nodes (thereby, they are able to tell to
@@ -107,7 +105,7 @@ Network Server in order to administrate the related end-device. For a reference 
 are designed to be in charge of a whole country or region (if the region has enough activity to
 deserve a dedicated Broker).
 
-## Network Server
+### Network Server
 
 Network servers are processing [MAC][mac] commands emitted by end-devices as well as taking care
 of the data rates and the frequency of the end-devices. Network Servers would emit commands to
@@ -119,19 +117,22 @@ mechanisms between Network Servers is planned for the first version. Also, it wo
 for a Broker to query another Network Server than the one it has been assigned to. Those
 features might be part of a second version. 
 
-## Handler
+### Handler
 
 Handlers materialize the entry point to the network for client Applications. They are secure
 referees which encode and decode data coming from application before transmitting them to a
 Broker of the network. Therefore, they are in charge of handling applications secret keys and
-only communicate an application id to Brokers (as well as a specific network session key,
-described in further sections). This way, the whole chain is able to forward a packet to the
-corresponding Handler without having any information about either the recipient (but a
+only communicate an application id to Brokers as well as specific network session keys for each
+node (described in further sections). This way, the whole chain is able to forward a packet to
+the corresponding Handler without having any information about either the recipient (but a
 meaningless id) or the content. 
 
-Because a given Handler is able to decrypt the data payload of a given packet, it could
-also implement mechanisms such as geolocation and send to the corresponding application some
-interesting meta-data.
+Because a given Handler is able to decrypt the data payload of a given packet, it could also
+implement mechanisms such as geolocation and send to the corresponding application some
+interesting meta-data alongside the data payload. Incidentally, a handler can only decrypt
+payload for packets related to applications registered to that handler. The handler is managing
+several application secret keys and use them to encrypt and decrypt corresponding packet
+payloads.
 
 A Handler could be either part of an application or a standalone trusty server on which
 application may register. The Things Network will provide Handlers as part of the whole network
