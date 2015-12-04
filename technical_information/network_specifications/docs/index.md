@@ -56,12 +56,13 @@ Nodes or end-devices refer to one end of the chain. End-devices emit signals usi
 - **B**: Can receive data from the network at precisely scheduled windows (Beacons)
 - **C**: Can receive data at any time from the network
 
-Incidentally, class A requires less power than B which requires less power than C. 
-An end-device has an address either assigned by the Network or self-defined. An end-device
-also has a specific secret application session key and a network session key 
+Incidentally, class A requires less power than B which requires less power than C.
+An end-device participating in a LoRaWAN network, has a device address and a secret
+device-specific application session key and network session key.
+These values are either assigned by the Network or self-defined.
 
-These specifications primarly focus on the class A. Future network versions will implement
-mechanisms to handle class B and class C but they are irrevelant with the current document.
+These specifications primarily focus on the class A. Future network versions will implement
+mechanisms to handle class B and class C but they are irrelevant with the current document.
 
 ### Gateway
 Gateways might be seen as a way to transform multiple messages emitters into one much more
@@ -69,11 +70,12 @@ demanding emitter. Therefore, a Gateway gathers [*LoRa*][lora_technology] signal
 bunch of near end-devices. A given end-device does not need to know the nearest gateways, nor it
 has to communicate with a specific one - signals are simply broadcasted into the wild open. 
 
-Gateways receive signals which reach them, and forward the message to a dedicated Router. The
+Gateways receive signals which reach them, and forward all received messages to a dedicated Router. The
 Data could be either a sensor result or a specific network command such as a connection
 request. A Gateway actually sends incoming packets to a router after having wrapped each of them
 into a [json][json] structure holding meta-data about the Gateway itself (such as Gateway's
-identifier, a timestamp and GPS coordinates if available).
+identifier, a timestamp and GPS coordinates if available). Note that a Gateway will forward
+packets from all LoRA Nodes in its vicinity, even if a Node is not part of the Things Network.
 
 Gateways can also emit packets coming from the network toward a Node using the [*LoRa
 technology*][lora_technology]. In fact, Gateways are in charge of taking care of emission at a
@@ -83,7 +85,8 @@ response mechanism //TODO add a link).
 
 ### Router
 
-Routers are entry points of the network from Nodes perspective. Packets transmitted by Nodes are forwarded to a specific Router from one or several Gateways. The Router then forwards those packets
+Routers are entry points of the network from the Nodes perspective. Packets transmitted by Nodes are
+forwarded to specific Routers from one or several Gateways. The Router then forwards those packets
 to one or several Brokers. The communication is bi-directional: Routers may also
 transfer packets from Broker to Gateways.
 
@@ -97,13 +100,14 @@ transfer packets from Broker to Gateways.
 Brokers have a global vision of a network's part. They are in charge of several nodes, meaning
 that they will handle packets coming from those nodes (thereby, they are able to tell to
 Routers if they can handle a given packet). Several Routers may send packets coming from the
-same end-device (shared by several segments / Gateways), all duplicates are managed by the
+same end-device (shared by several segments / Gateways), all duplicates are processed by the
 Broker and are sent to a corresponding Handler.
 
-A Broker is thereby able to check the integrity of a packet and is closely communicating with a
+A Broker is thereby able to check the integrity of a received packet and is closely communicating with a
 Network Server in order to administrate the related end-device. For a reference of magnitude, Brokers
 are designed to be in charge of a whole country or region (if the region has enough activity to
-deserve a dedicated Broker).
+deserve a dedicated Broker). Note that while brokers are able to verify the integrity of the packet (and
+therefore the identify of the end device), they are not able to read application data.
 
 ### Network Server
 
@@ -119,9 +123,9 @@ features might be part of a second version.
 
 ### Handler
 
-Handlers materialize the entry point to the network for client Applications. They are secure
+Handlers materialize the entry point to the network for Applications. They are secure
 referees which encode and decode data coming from application before transmitting them to a
-Broker of the network. Therefore, they are in charge of handling applications secret keys and
+Broker of the network. Therefore, they are in charge of handling secret applications keys and
 only communicate an application id to Brokers as well as specific network session keys for each
 node (described in further sections). This way, the whole chain is able to forward a packet to
 the corresponding Handler without having any information about either the recipient (but a
@@ -131,13 +135,21 @@ Because a given Handler is able to decrypt the data payload of a given packet, i
 implement mechanisms such as geolocation and send to the corresponding application some
 interesting meta-data alongside the data payload. Incidentally, a handler can only decrypt
 payload for packets related to applications registered to that handler. The handler is managing
-several application secret keys and use them to encrypt and decrypt corresponding packet
+several secret application session keys and it uses these to encrypt and decrypt corresponding packet
 payloads.
 
 A Handler could be either part of an application or a standalone trusty server on which
-application may register. The Things Network will provide Handlers as part of the whole network
+applications may register. The Things Network will provide Handlers as part of the whole network
 but - and this is true for any component - anyone could create its own implementation as long
 as it is compliant to the following specifications.
+
+
+### Applications
+
+An Application is the owner of an end device in the LoRaWAN model. Applications run outside
+the Things Network core and interact with the Things Network via a handler.  As such applications
+are responsible for registering their devices with the network via a handler. If not, the device
+will not be able to join the Things Network.
 
 -------------------
 ![Uplink to application](img/uplink_broker.svg)
