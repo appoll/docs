@@ -81,13 +81,14 @@ discovering / broadcasting (see the section *Address resolution and caching*).
 
 ### Downlink communication
 
-Because of the first version, the network will only supports devices of class A, the connection
-between a gateway and a router would stay opened for a maximum of 2 seconds. The whole process
-is detailed in the [LoRaWAN specifications 1.0][lorawan] - section 3.3 Receive Windows. In few
-words though, after having emitted messages, a class A node will open two short receive windows
-and will allow incoming messages from a gateway. Windows are opened exactly one and two seconds
-after the packet's emission. Sending packet at the right time is part of the gateway
-responsibility, however, scheduling the emission is part of the network's one. 
+Because of the first version, the network will only supports devices of class A, the router can
+only communicate back during a short frame of 2 seconds after an uplink packet has been
+received by the gateway. The whole process is detailed in the [LoRaWAN specifications
+1.0][lorawan] - section 3.3 Receive Windows. In few words though, after having emitted
+messages, a class A node will open two short receive windows and will allow incoming messages
+from a gateway. Windows are opened exactly one and two seconds after the packet's emission.
+Sending packet at the right time is part of the gateway responsibility, however, scheduling the
+emission is part of the network's one. 
 
 If any command or data have to be sent to the node, it has to be done precisely during one of
 this two windows. More details about commands are given in the section related to the
