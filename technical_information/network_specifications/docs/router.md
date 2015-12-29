@@ -68,13 +68,10 @@ sum up as follow:
 - The router acknowledge reception of data
 - Gateways could be protected by a firewall or could use a NAT, routers cannot initiate communications
 - Gateways might trigger and pull the router periodically to keep a connection open (this is
-  fairly an implementation detail, but the gateway protocol we are refering to is describing an
-  implementation. We'll see how we handle this in the next section)
-- The communication is closed after a delay (after the second receive window, cf. downlink
-  communication)
+  fairly an implementation detail)
 
-Once a communication is established with a gateway and a packet received, the router has to
-determine to which broker should the packet be forwarded. Two options exist:
+Once a new communication is established and a packet received, the router has to determine to
+which broker should the packet be forwarded. Two options exist:
 
 - The address is known and associated to a broker
 - The address is unknown
