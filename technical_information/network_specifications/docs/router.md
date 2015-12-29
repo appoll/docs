@@ -54,7 +54,7 @@ separately.
 
 A given gateway will be connected to a router of its choice, meaning that the gateway is
 configured to interact with that precise router (a gateway could be configured for several
-routers, but the idea is the same; they are not allowed dynamically and won't change as long as
+routers, but the idea is the same; they are not allocated dynamically and won't change as long as
 the configuration remains the same). Obviously, a router might received communications from
 several gateways as well. Thus, routers do not have upfront knowledge of gateways. A router
 only receives incoming connections from gateways, and once these are closed, it keeps no trace
