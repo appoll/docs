@@ -53,12 +53,12 @@ handler.
 
 The broker is waiting for router to forward packets coming from nodes. When receiving a packet,
 the broker should firstly check whether or not it should take care of the packet. This is done
-by looking into a local storage of node addresses. This is list of addresses is created
-dynamically during the broker's lifecycle as long as handlers register to the broker. 
-Then, because collisions may happen between node adresses, the broker also has to perform a
-`MIC check` to ensure both the validity and its responsibility for the given packet. 
+by looking into a local storage of node addresses. This list of addresses is created
+dynamically during the broker's lifecycle as long as handlers register to the broker.  Then,
+because collisions may happen between node adresses, the broker also has to perform a `MIC
+check` to ensure both the validity of and its responsibility for the given packet. 
 
-An unknown address or a invalid `MIC check` should lead to an error transmitted to the router
+An unknown address or an invalid `MIC check` should lead to an error transmitted to the router
 emitter. Errors are detailed in a next section. If everything went well, the broker has to
 decode the packet `MAC header - MHDR` and determine whether the packet carry a command or data.
 The broker's behavior is thereby slightly different regarding to the packet's content. By the
