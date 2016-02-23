@@ -16,7 +16,7 @@ authority of any kind, meaning that we cannot ensure that a given broker impleme
 strictly identical to the one provided by the foundation. The question is still open and
 discussion are welcomed. 
 
-Also, for the rest of this document, we'll described handlers as a completely independant
+Also, for the rest of this document, we'll described handlers as a completely independent
 component that interacts with both a broker and an application. In practice, handlers could be
 partially merged with an application or be provided as a cloud service. This does not change
 anything for the network point of view as long as handlers remain compliant with the uplink
@@ -26,14 +26,14 @@ however, this document only refers to one type.
 
 Having said that, the handler is supposed to perform the following actions:
 
-- Register an application and a bunch of personnalized devices and DevEUI
+- Register an application and a bunch of personalized devices and DevEUI
 - Register to a broker (with an application EUIs, 
 - Receive and decrypt incoming packets from a broker with deduplication mechanisms
 - Handle join request (generate NwkSKey, AppSKey, AppNounce...)
 - Forward packet's payload to its application
 - Forward response from applications to brokers
 
-Again, this components act as a relay between some recipients. Let's detail in the
+Again, this component acts as a relay between some recipients. Let's detail in the
 communication in two parts and distinguish uplink communication from application requests. We
 won't talk about downlink communication because the handler materalize the end of the chain
 and, the downlink communication is part of the uplink process for the handler point of view.
@@ -43,9 +43,9 @@ broker (so far, only to register / unregister itself).
 
 ### Handler configuration
 
-Intially, the network is completely unaware of any application meaning that any messages
+Initially, the network is completely unaware of any application meaning that any messages
 emitted by gateways won't go further than routers. However, at any time, an application can
-connect the network by interacting with a handler. 
+connect to the network by interacting with a handler. 
 
 To join the network, the application has to provide several private data such as:
 
@@ -54,8 +54,8 @@ To join the network, the application has to provide several private data such as
 - A list of known DevEUI 
 - Way back information (protocol + server)
 
-With those pieces of information, the handler would be in charge of all the trafic towards the
-given application. An application could possibly updates the list of nodes or the communication
+With those pieces of information, the handler would be in charge of all the traffic towards the
+given application. An application could possibly update the list of nodes or the communication
 protocol later. 
 
 There is no reason for a handler to reject an application join request for the moment however,
@@ -69,5 +69,5 @@ could be either data coming from a node or a join request.
 Because of the network architecture, several duplicates of the same messages could arrive to
 the handler. We assume that all of those messages are arriving all in the same time. The
 handler will then have to deduplicate all messages if necessary and proceed to a geolocation
-based on the information provided by the gateways. The handler also has an access to the
-application secret key, Thus, it could decrypt the data and forward them to the application. 
+based on the information provided by the gateways. The handler also has access to the
+application secret key, Thus, it could decrypt the data and forward it to the application. 
