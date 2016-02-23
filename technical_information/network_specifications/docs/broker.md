@@ -33,7 +33,7 @@ brokers.
 Relations are schematically represented in the next diagram. 
 
 --------------------- 
-![Broker's relations](./img/broker_relations.svg)
+![Broker's relations](./img/broker_relations.svg?raw=true)
 <p align="center">*Broker's relations*</p>
 -------------------
 
