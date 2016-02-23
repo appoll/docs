@@ -19,21 +19,21 @@ NS-1.4      | Reply if necessary with another command
 
 ## Role
 
-A network server is a component dedicated to the network management. It handle the required
+A network server is a component dedicated to the network management. It handles the required
 logic to handle and to emit MAC commands (more precisions about MAC commands are given below).
 Basically, a network server is composed of two parts:
 
 - a core logic
 - a data storage
 
-The former interprets commands sent by nodes, forwarded by routers and brokers, combine them
+The former interprets commands sent by nodes, forwarded by routers and brokers, combines them
 with data stored in the latter in order to give an appropriate answer. The main usecase of the
 network server will concern the adaptive data rate (*ADR*) control detailed in the [LoRaWAN
 specifications 1.0][lorawan] - section 4.3.1.1 Adaptive data rate control in frame header. 
 
 In order to keep the network highly reactive, we'll adopt an in-memory storage. The network
 server will make sure data are persisted regularly in order to both prevent from small
-disruptions and recover from an existing state after an update or a maintainance activity.
+disruptions and recover from an existing state after an update or a maintenance activity.
 
 A network server is associated to a broker. The broker is forwarding, queuing and dispatching
 packets whereas the network server interprets them when necessary. Because a network server is
@@ -48,10 +48,10 @@ network but rather fragmented over it.
 > accessible from anywhere in the network. This nevertheless raises an issue about
 > confidentiality and confidence over all network constituents. 
 
-Besides, the network server has also an active role during an over-the-air activation (join
+Moreover, the network server has also an active role during an over-the-air activation (join
 request) from a node: it allocates a new randomly generated device address. Because node
-addresses within the network are 24 bits length, there is 100% chances to allocate the same
-address to two differents nodes after more or less 5500 allocations. However, all packets also
+addresses within the network are 24 bits length, there is a 100% chance to allocate the same
+address to two different nodes after more or less 5500 allocations. However, all packets also
 carry a MIC number, and thus there is still a way for the network to clearly identify a node
 without any risk of collision. 
 
@@ -59,11 +59,11 @@ without any risk of collision.
 ### MAC Commands
 
 There is a set of fourteen (in fact, 7 commands and 7 acknowledgements) MAC commands that will
-transit over the network and with which it should be compliant. A MAC command materialize an
+transit over the network and with which it should be compliant. A MAC command materializes an
 exchange between the network (via the network server) and the MAC layer of an env-device. This
 means that those commands are invisible for the application server registered to a handler, but
 also for the one embedded on the device.
-These commands serves the network internal management: 
+These commands serve the network internal management: 
 
 Command         | Transmitted by        | Description 
 ----------------|-----------------------|------------
@@ -96,9 +96,9 @@ components if needed, they will talk to each other through well defined interfac
 pattern we are using for any component, the network server will be divided in three
 sub-components:
 
-- The storage, that provides an interface to the core logic to store and retrieve stored data.
-- The core logic, which manages commands and trigger actions on the other sub components.
-- The broker adapter, which communicates with the broker and trigger action on the core logic
+- The storage that provides an interface to the core logic to store and retrieve stored data.
+- The core logic, which manages commands and triggers actions on the other sub components.
+- The broker adapter, which communicates with the broker and triggers actions on the core logic
   when commands are forwarded by the broker.
 
 ## Interfaces
