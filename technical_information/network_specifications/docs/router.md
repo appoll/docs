@@ -96,7 +96,7 @@ Network Server. Incidentally, only one of the two windows is available, meaning 
 through the first window will cause the second one to never be opened. 
 
 -------------------
-![Receive Windows](img/receive_windows.svg)
+![Receive Windows](https://cdn.rawgit.com/TheThingsNetwork/docs/master/technical_information/network_specifications/docs/img/receive_windows.svg)
 <p align="center">*Receive Windows*</p>
 -------------------
 

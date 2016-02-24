@@ -33,7 +33,7 @@ brokers.
 Relations are schematically represented in the next diagram. 
 
 --------------------- 
-![Broker's relations](img/broker_relations.svg)
+![Broker's relations](https://cdn.rawgit.com/TheThingsNetwork/docs/master/technical_information/network_specifications/docs/img/broker_relations.svg)
 <p align="center">*Broker's relations*</p>
 -------------------
 
@@ -90,7 +90,7 @@ content.
 
 
 --------------------- 
-![Broker dipatching](img/broker_dispatching.svg)
+![Broker dipatching](https://cdn.rawgit.com/TheThingsNetwork/docs/master/technical_information/network_specifications/docs/img/broker_dispatching.svg)
 <p align="center">*Broker dispatching*</p>
 -------------------
 

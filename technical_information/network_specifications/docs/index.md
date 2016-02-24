@@ -43,7 +43,7 @@ Additionally, these components interact with external entities over which we hav
 - Applications
 
 -------------------
-![overview](img/overview.svg)
+![overview](https://cdn.rawgit.com/TheThingsNetwork/docs/master/technical_information/network_specifications/docs/img/overview.svg)
 <p align="center">*Network components*</p>
 -------------------
 
@@ -91,7 +91,7 @@ to one or several Brokers. The communication is bi-directional: Routers may also
 transfer packets from Broker to Gateways.
 
 -------------------
-![Uplink forwarding](img/uplink_router.svg)
+![Uplink forwarding](https://cdn.rawgit.com/TheThingsNetwork/docs/master/technical_information/network_specifications/docs/img/uplink_router.svg)
 <p align="center">*Uplink forwarding*</p>
 -------------------
 
@@ -152,7 +152,7 @@ are responsible for registering their devices with the network via a handler. If
 will not be able to join the Things Network.
 
 -------------------
-![Uplink to application](img/uplink_broker.svg)
+![Uplink to application](https://cdn.rawgit.com/TheThingsNetwork/docs/master/technical_information/network_specifications/docs/img/uplink_broker.svg)
 <p align="center">*Uplink to an Application*</p>
 -------------------
 
